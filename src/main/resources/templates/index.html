@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>条码校验系统</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/index.css" th:href="@{/css/index.css}"/>
+</head>
+<body>
+<div id="box">
+<div><h1>条码校验系统</h1></div>
+  <div>
+    <ul>
+      <li><a th:href="@{tray.html}">检查卡板</a></li>
+      <li><a th:href="@{package.html}">检查中箱</a></li>
+      <li><a th:href="@{box.html}">检查彩盒</a></li>
+      <li><a th:href="@{list.html}">记录查询</a></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

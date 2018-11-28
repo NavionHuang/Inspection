@@ -1,0 +1,96 @@
+.ok{
+  color: green;
+}
+.ng{
+  color: red;
+}
+.even{
+	background-color: #EEEEEE;
+}
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+body{
+  width: 1300px;
+  margin: 5px auto;
+}
+.head{
+  height: 110px;
+}
+.head a{
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+}
+.head a:hover{
+  color: brown;
+  text-decoration: underline;
+}
+.head h1{
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 50px;
+  font-family: 宋体;
+}
+#form input,select{
+  height: 30px;
+  margin: 5px;
+}
+
+#commit{
+  height: 30px;
+  width:100px;
+  margin-left: 10px;
+  font-size: 20px;
+  vertical-align: middle;
+  border-radius:2px;
+}
+.gap{
+  margin: 10px auto;
+}
+.table{
+  table-layout: fixed;
+  width:100%;
+}
+.central{
+  height: 560px;
+}
+.central td{
+  height: 40px;
+  text-align: center;
+}
+.code{
+  width: 100px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.no,.inspectionResult{
+ width: 40px;
+}
+.barCode{
+  width: 170px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.createTime{
+  width: 90px;
+}
+.tr td{
+  font-size: 20px;
+  background-color: #D5D5D5;
+}
+.foot button{
+height: 30px;
+border-radius:2px;
+}
+.po,.productSpec{
+	width: 140px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}

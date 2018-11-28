@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>检验记录查询</title>
+<link rel="stylesheet" type="text/css" href="/css/list.css"
+	th:href="@{/css/list.css}" />
+<script src="/js/jquery-3.3.1.min.js"
+	th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script src="/laydate/laydate.js" th:src="@{/laydate/laydate.js}"></script>
+<script src="/js/list.js" th:src="@{/js/list.js}"></script>
+</head>
+<body>
+	<div class="head">
+		<div>
+			<a th:href="@{/}">返回首页</a>
+		</div>
+		<h1>检验记录查询</h1>
+	</div>
+	<div>
+		<form th:action="@{/inspection/list}" method="post" id="form">
+			<table>
+				<tr>
+					<td>工单号</td>
+					<td><input th:value="${hx.po}" type="text" name="po" /></td>
+					<td>卡板条码</td>
+					<td><input th:value="${hx.trayBarCode}" type="text"
+						name="trayBarCode" /></td>
+					<td>中箱条码</td>
+					<td><input th:value="${hx.packageBarCode}" type="text"
+						name="packageBarCode" /></td>
+					<td>彩盒条码</td>
+					<td><input th:value="${hx.boxBarCode}" type="text"
+						name="boxBarCode" /></td>
+				</tr>
+				<tr>
+					<td>产品型号</td>
+					<td><input th:value="${hx.productSpec}" type="text"
+						name="productSpec" /></td>
+					<td>检验人</td>
+					<td><input th:value="${hx.createName}" type="text"
+						name="createName" /></td>
+					<td>检验日期</td>
+					<td><input th:value="${hx.createTime}" type="text"
+						name="createTime" id="date" /></td>
+					<td>检验结果</td>
+					<td><select th:switch="${hx.inspectionResult}"
+						name="inspectionResult">
+							<option th:case="null" selected="selected" value="">ALL</option>
+							<option th:case="'OK'" selected="selected" value="OK">OK</option>
+							<option th:case="'NG'" selected="selected" value="NG">NG</option>
+							<option value="">ALL</option>
+							<option value="OK">OK</option>
+							<option value="NG">NG</option>
+					</select> <input type="hidden" th:value="${page}" name="page" id="page" />
+						<input type="button" value="查  询" id="commit" onclick="query();" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div class="gap"></div>
+	<div class="central">
+		<table class="table">
+			<tr class="tr">
+				<td class="no">序号</td>
+				<td class="po">工单号</td>
+				<td class="productSpec">产品型号</td>
+				<td class="barCode">中箱条码</td>
+				<td class="barCode">卡板条码</td>
+				<td class="barCode">彩盒条码</td>
+				<td class="code">绑定的条码</td>
+				<td class="code">检验的条码</td>
+				<td class="inspectionResult">检验结果</td>
+				<td class="createName">检验人</td>
+				<td class="createTime">检验日期</td>
+			</tr>
+			<tr th:each="record,satr:${recordList}">
+				<td th:text="${satr.count}"></td>
+				<td th:class="po" th:text="${record.po}"></td>
+				<td th:class="productSpec" th:text="${record.productSpec}"></td>
+				<td th:class="barCode" th:attr="title=${record.packageBarCode}"
+					th:text="${record.packageBarCode}"></td>
+				<td th:class="barCode" th:attr="title=${record.trayBarCode}"
+					th:text="${record.trayBarCode}"></td>
+				<td th:class="barCode" th:attr="title=${record.boxBarCode}"
+					th:text="${record.boxBarCode}"></td>
+				<td th:class="code" th:attr="title=${record.originalData}"
+					th:text="${record.originalData}"></td>
+				<td th:class="code" th:attr="title=${record.inspectionData}"
+					th:text="${record.inspectionData}"></td>
+				<td th:class="${record.inspectionResult=='OK'}? 'ok' : 'ng'"
+					th:text="${record.inspectionResult}"></td>
+				<td th:text="${record.createName}"></td>
+				<td th:text="${record.createTime}"></td>
+			</tr>
+		</table>
+	</div>
+	<div class="foot">
+		<button onclick="previousPage();">上一页</button>
+		<span th:text="${page}"></span>/<span th:text="${page}"></span>
+		<button onclick="nextPage();">下一页</button>
+		<input type="hidden" value="0" name="flg" id="flg" />
+	</div>
+
+</body>
+</html>

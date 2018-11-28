@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>检查卡板</title>
+<script language="JavaScript" type="text/javascript"
+	src="/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script language="JavaScript" type="text/javascript" src="/js/tray.js"
+	th:src="@{/js/tray.js}"></script>
+<link rel="stylesheet" type="text/css" href="/css/tray.css"
+	th:href="@{/css/tray.css}" />
+</head>
+<body>
+	<div class="head">
+		<div>
+			<a th:href="@{/}">返回首页</a>
+		</div>
+
+		<h1>检查卡板</h1>
+		<div>
+			检验人:<input type="text" class="name" />
+		</div>
+		<div>
+			卡板条码:<input type="text" id="trayBarCode" value="" />
+		</div>
+		<div>
+			<input type="button" value="检验" onclick="tray();" />
+		</div>
+		<div>
+			<input type="button" value="保存检验记录" onclick="save();" />
+		</div>
+	</div>
+	<div class="gap"></div>
+	<div class="central">
+		<div class="left">
+			<div class="left-font">
+				绑定的中箱条码<span id="size"></span>
+			</div>
+			<div id="left"></div>
+		</div>
+		<div class="gap2"></div>
+		<div class="right">
+			<div class="right-font">
+				输入需要校验的中箱条码<input type="text" id="packageBarCode" /><input
+					type="button" value="确定" onclick="inspection();" />
+			</div>
+			<div id="right"></div>
+		</div>
+	</div>
+	<div class="mes"></div>
+	<audio id="p" th:src="@{/audio/p.wav}" src="/audio/f.wav"
+		align="center" border="0" width="1" height="1"></audio>
+	<audio id="f" th:src="@{/audio/f.wav}" src="/audio/f.wav"
+		align="center" border="0" width="1" height="1"></audio>
+</body>
+</html>

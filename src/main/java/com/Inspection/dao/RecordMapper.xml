@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Inspection.dao.RecordMapper">
+	<insert id="save" parameterType="InspectionRecord">
+		insert into
+		LX_InspectionRecord(PackageBarCode,TrayBarCode,CreateTime,CreateName,OriginalData,InspectionData,InspectionResult,po,productSpec,boxBarCode)
+		values(#{packageBarCode},#{trayBarCode},#{createTime},#{createName},#{originalData},#{inspectionData},#{inspectionResult},#{po},#{productSpec},#{boxBarCode})
+	</insert>
+	<select id="query" parameterType="InspectionRecord"
+		resultType="InspectionRecord">
+		select * from(select TOP ${pageSize} ROW_NUMBER() OVER
+		(ORDER BY id
+		desc) AS romid,* from LX_InspectionRecord
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="ir.packageBarCode!=null and ir.packageBarCode!=''">PackageBarCode=#{ir.packageBarCode}</if>
+			<if test="ir.trayBarCode!=null and ir.trayBarCode!=''">and TrayBarCode=#{ir.trayBarCode}</if>
+			<if test="ir.createTime!=null and ir.createTime!=''">and CreateTime=#{ir.createTime}</if>
+			<if test="ir.createName!=null and ir.createName!=''">and CreateName=#{ir.createName}</if>
+			<if test="ir.po!=null and ir.po!=''">and po=#{ir.po}</if>
+			<if test="ir.productSpec!=null and ir.productSpec!=''">and productSpec=#{ir.productSpec}</if>
+			<if test="ir.inspectionResult!=null and ir.inspectionResult!=''">and InspectionResult=#{ir.inspectionResult}</if>
+			<if test="ir.boxBarCode!=null and ir.boxBarCode!=''">and boxBarCode=#{ir.boxBarCode}</if>
+		</trim>
+		)AS TEMP1
+		WHERE
+		romid > ${page}
+	</select>
+	<select id="queryByPoAndProductSpec"
+		parameterType="InspectionRecord" resultMap="map">
+		select top 1 MoId,ProductType from
+		<if test="ir.packageBarCode!=null and ir.packageBarCode!=''">TSnBarcode where CartonId=#{ir.packageBarCode}</if>
+		<if test="ir.trayBarCode!=null and ir.trayBarCode!=''">TCarton where PalletId=#{ir.trayBarCode}</if>
+		<if test="ir.boxBarCode!=null and ir.boxBarCode!=''">TSnBarcode where BarcodeId=#{ir.boxBarCode}</if>
+	</select>
+	<resultMap type="Map" id="map">
+		<result property="po" column="MoId" />
+		<result property="productSpec" column="ProductType" />
+	</resultMap>
+</mapper>
